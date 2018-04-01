@@ -1,0 +1,158 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>CS61C Fall 2014 Homework 4</title>
+<link rel="stylesheet" type="text/css" href="CS61C%20Fall%202014%20Homework%204_files/style.html">
+</head>
+
+<body>
+
+<div class="header">
+<h1>CS61C Fall 2014 Homework 4</h1>
+TA: Riyaz Faizullabhoy, Rohan Chitnis
+</div>
+
+<div class="content">
+<p>Due Sunday, November 9, 2014 @ 11:59pm</p>
+
+<h2>Updates</h2>
+<ul class="update">
+</ul>
+
+<h2>Goals</h2>
+<p>This assignment will check your understanding of synchronous digital systems, state elements, and combinational logic. </p>
+
+
+<h2>Submission</h2>
+<p>Submit your solution by creating a directory named <code>hw4</code> that contains <tt><a href="http://www-inst.eecs.berkeley.edu/~cs61c/fa14/hw/04/hw4.txt">hw4.txt</a></tt>.
+ (File names are case-sensitive and the submission program will not 
+accept your submission if your file names differ at all from those 
+specified) From within that directory, type <code>submit hw4</code>. Partners are not allowed on this assignment.</p>
+<p>Copy the contents of <code>~cs61c/hw/04</code> to a suitable location in your home directory to obtain files you will want for this homework.</p>
+<pre class="output">$ <span class="input"> cp -r ~cs61c/hw/04 ~/hw4 </span>
+</pre>
+
+
+<h2>Exercises</h2>
+<h3>Problem 1: Waveform Diagrams - 4 pts</h3>
+<br>
+
+<div class="image"><img alt="waveform circuit.jpg" src="CS61C%20Fall%202014%20Homework%204_files/waveform%2520circuit.jpg"></div>
+
+<p>Consider the circuit of Flip-Flops (FF) shown here. 
+Assume that input X alternates between 1 and 0, 10ns after every rising 
+edge. Initially, X is 0 (so 10ns after the first rising edge it should 
+be 1) while A, B, C, and D are unknown. 
+Assume one clock cycle is 30 ns. Given the clock signal, draw the wave 
+for input X, and the signals at points A, B, C, and D in the circuit for
+ the first 6 clock cycles. 
+Assume that the clk-to-q delay is 5 ns, the setup time is negligible (~0
+ ns), and the hold time is 5ns. Assume that Flip-Flops take their new 
+value on the <i>rising</i> edge of the clock cycle. 
+Assume time = 0 on the first rising edge.  Note the NOT gate that 
+precedes B (you may ignore propagation delay for this problem).</p>
+
+<p>
+Answer the following questions. You would want to fill out the waveform 
+diagram below to help though you don't have to submit it.
+Consider six clock cycles (so six rising edges) as shown in the diagram.
+ Assume the diagram is cut off 5ns after the last rising edge.
+You only need to consider from t = 0 ns to t = 155 ns for this problem.
+
+</p>
+<table style="border:none;"><tbody><tr>
+<td>
+<div class="image"><img alt="waveform.gif" src="CS61C%20Fall%202014%20Homework%204_files/waveform.gif"></div>
+</td>
+<td>
+	<ol>
+	<li>How many times does the value at B change (changing from undetermined to 1 or 0 counts as one)?</li>
+	<li>How many times does the value at D change (changing from undetermined to 1 or 0 counts as one)?</li>
+	<li>At which time(s) does the value at A becomes stable at 0?
+	</li><li>At which time(s) does the value at C becomes stable at 1?
+	</li></ol> 
+</td>
+</tr></tbody></table>
+
+
+
+<h3>Problem 2: Clock Frequency - 3 pts</h3>
+<p>
+Consider this circuit.
+It accumulates two arguments at a time, arriving at each clock period. 
+You are given the following: the adder propagation delay is 1 ns, the 
+register setup time is 2 ns, 
+the register hold time is 2 ns, the register clk-to-q delay is 3 ns, and
+ the clock frequency is 100 MHz. 
+</p>
+<table style="border:none;"><tbody><tr>
+<td>
+<div class="image"><img alt="clock frequency circuit.jpg" src="CS61C%20Fall%202014%20Homework%204_files/clock%2520frequency%2520circuit.jpg"></div>
+</td>
+<td>
+<ol>
+	<li>Would this accumulator work properly? Explain why or why not. </li>
+	<li>Now assume that the arguments arrive 2 ns after each clock period. 
+ Give the critical path delay and the maximum clock frequency at which 
+the circuit will work.</li>
+	<li>Describe a way to rearrange the accumulator so that the maximum	
+clock frequency will be greater.  You may only use the components 
+already present in the circuit.</li>
+</ol>
+</td> </tr>
+</tbody></table>
+
+
+
+<h3>Problem 3: Simple FSM and Truth Tables - 3 pts</h3>
+<p>Design an FSM that would take an infinite stream of bits and output 1 <b>twice</b> if it sees two consecutive 1's.  In other words, given some input X<sub>i</sub>, if X<sub>i-2</sub> = 
+X<sub>i-1</sub> = 1 or X<sub>i-1</sub> = X<sub>i</sub> = 1, then it will
+ output 1.  Then convert it into a truth table mapping each state and 
+input to a next state and an output. Name the states 
+meaningfully so that it is easily understandable (for example, Seen1 and
+ Seen11). You should have at most four states only.  You only need to 
+submit the truth table; you do not need to submit 
+your drawing of the FSM.
+</p>
+
+
+
+<h3>Problem 4: Truth Tables, Boolean Algebra, FSMs, Logic Circuits - 5 pts</h3>
+Consider the following finite state machine.
+<br>
+<table style="border:none;">
+<tbody><tr><td>
+<img src="CS61C%20Fall%202014%20Homework%204_files/fsm.png" width="450" height="270">
+</td><td>
+<ol>
+	<li>Come up with the MOST simplified boolean expressions for 
+determining bits for the next state and the output bit given the current
+ state and the input bit. You should have 3 expressions,
+	one for each digit of the next state as well as one for output. (You 
+might want to first construct a truth table.).<br><br>
+	Please label the left bits as <code>Curr_1</code> and <code>Next_1</code> for start state and next state left bits, respectively, and do the same for right bits <code>Curr_0</code> and <code>Next_0</code>.</li>
+	<br>
+	<li><tt>fsmCompute</tt> takes one bit at a time as input.  Fill in the 
+blanks below so that it behaves as according to the FSM above.  Hint: 
+your expressions from part a should come in handy, along with some 
+bitwise operators.  Also, note how the state is a <a href="http://stackoverflow.com/questions/572547/what-does-static-mean-in-a-c-program">static variable</a>, so it is maintained across function calls.
+<pre>/*
+	Called once per "clock cycle."
+	Assume input x is 0 or 1.
+	Updates state and outputs FSM output (0 or 1).
+*/
+int fsmCompute(int x) {
+	int retval;
+	static unsigned int state = 0x1;
+	retval = ______________________;
+	state = _______________________;
+	return retval;
+}
+	</pre></li>
+</ol>
+</td>
+</tr><tr>
+</tr></tbody></table>
+<br>
+</div>
+
+</body></html>
