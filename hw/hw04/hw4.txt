@@ -4,30 +4,30 @@ Login:
 
 
 P1- Waveform Diagrams
-1)
-2)
-3)
-4)
+1)4
+2)2
+3)5 to 35, 65 to 95, 125 to 155
+4)65 to 95, 125 to 155
 
 
 
 P2 - Clock Frequency
-1)
-2)
-3)
-
+1) Yes, it will work, if the arguments arrive on time. The clock cycle is 10 ns, but the minimum to work is 9 ns (1 + 1 + 2 + 2 + 3)
+2) This clock will work at 11 ns (~91 MHz)
+3) Swap the second adder with the register. The clock cycle can then be 5 ns (200 MHz)
 
 
 P3 - Simple FSM and Truth Tables
-
-CurState	| Input	| NextState	| Output
-		| 	| 		| 
-		| 	| 		| 
-		| 	| 		| 
-		| 	| 		| 
-		| 	| 		| 
-		| 	| 		| 
-		| 	| 		|  
+ _______________________________________________
+|CurState	| Input	| NextState	| Output|
+|_______________|_______|_______________|_______|
+|Initial	| 0	| Initial	| 0	|
+|Initial	| 1	| Seen1		| 0	|
+|Seen1		| 0	| Initial	| 0	|
+|Seen1		| 1	| Seen11	| 0	|
+|Seen11		| 0/1	| Return	| 1	|
+|Return		| 0/1	| Initial	| 1	|
+|_______________|_______|_______________|_______|
 
 //you can add more rows if necessary
 
@@ -36,12 +36,27 @@ CurState	| Input	| NextState	| Output
 P4 - Truth Tables, Boolean Algebra, FSMs, Logic Circuits
 1)
 
-Out =
+Input bit as x, Current state [0 bit as Curr_0, 1 bit as Curr_1]
 
-Next1 =
+Out = Curr_0 & ~(x)
 
-Next0 =
+Next1 = ~(Curr_1) & x
+
+Next0 = ~(x)
 
 2)
+/*
+	Called once per "clock cycle."
+	Assume input x is 0 or 1.
+	Updates state and outputs FSM output (0 or 1).
+*/
+
+int fsmCompute(int x) {
+	int retval;
+	static unsigned int state = 0x1;
+	retval = (state % 2) & (~x);
+	state = (~x) + ((((state >> 1) % 2) & x) << 1);
+	return retval;
+}
 
 
